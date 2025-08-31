@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestion Financière - Calcul des Bénéfices</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="light">
+    <header class="header">
+        <div class="header-content">
+            <a href="#" class="logo">
+                <i class="fas fa-chart-line"></i>
+                Gestion Financière
+            </a>
+            <div class="header-controls">
+                <button class="mobile-menu-toggle" onclick="toggleMobileMenu()">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <nav class="nav-menu">
+                    <button class="nav-item active" data-section="dashboard" onclick="showSection('dashboard')">
+                        <i class="fas fa-tachometer-alt"></i>
+                        <span>Tableau de bord</span>
+                    </button>
+                    <button class="nav-item" data-section="history" onclick="showSection('history')">
+                        <i class="fas fa-history"></i>
+                        <span>Historique</span>
+                    </button>
+                    <button class="nav-item" data-section="partners" onclick="showSection('partners')">
+                        <i class="fas fa-handshake"></i>
+                        <span>Associés</span>
+                    </button>
+                    <button class="nav-item" data-section="employees" onclick="showSection('employees')">
+                        <i class="fas fa-users"></i>
+                        <span>Employés</span>
+                    </button>
+                    <button class="nav-item" data-section="reports" onclick="showSection('reports')">
+                        <i class="fas fa-chart-bar"></i>
+                        <span>Rapports</span>
+                    </button>
+                </nav>
+                <div class="theme-controls">
+                    <button class="theme-toggle" onclick="toggleTheme()">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                    <div class="color-palette">
+                        <button class="color-option" style="background-color: #3b82f6;" data-color="#3b82f6" onclick="changeAccentColor('#3b82f6')"></button>
+                        <button class="color-option" style="background-color: #10b981;" data-color="#10b981" onclick="changeAccentColor('#10b981')"></button>
+                        <button class="color-option" style="background-color: #f59e0b;" data-color="#f59e0b" onclick="changeAccentColor('#f59e0b')"></button>
+                        <button class="color-option" style="background-color: #ef4444;" data-color="#ef4444" onclick="changeAccentColor('#ef4444')"></button>
+                        <button class="color-option" style="background-color: #8b5cf6;" data-color="#8b5cf6" onclick="changeAccentColor('#8b5cf6')"></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <!-- Dashboard Section -->
+        <section id="dashboard" class="main-section active">
+            <div class="section-header">
+                <h1><i class="fas fa-tachometer-alt"></i> Tableau de bord</h1>
+                <div class="month-selector">
+                    <label for="currentMonth">Mois:</label>
+                    <input type="month" id="currentMonth" name="currentMonth">
+                </div>
+            </div>
+
+            <form id="financialForm">
+                <!-- Revenue Section -->
+                <section class="form-section">
+                    <h2><i class="fas fa-dollar-sign"></i> Revenus</h2>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="monthlyRevenue">Revenu mensuel total (DH)</label>
+                            <input type="number" id="monthlyRevenue" name="monthlyRevenue" step="0.01" min="0" required>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Expenses Section -->
+                <section class="form-section">
+                    <h2><i class="fas fa-credit-card"></i> Dépenses</h2>
+                    <div class="expenses-grid">
+                        <div class="expense-category">
+                            <div class="expense-header">
+                                <i class="fas fa-tint expense-icon"></i>
+                                <h4>Facture d'Eau</h4>
+                            </div>
+                            <div class="form-group">
+                                <label for="waterBill">Montant (DH)</label>
+                                <input type="number" id="waterBill" name="waterBill" step="0.01" min="0" required>
+                            </div>
+                        </div>
+
+                        <div class="expense-category">
+                            <div class="expense-header">
+                                <i class="fas fa-bolt expense-icon"></i>
+                                <h4>Facture d'Électricité</h4>
+                            </div>
+                            <div class="form-group">
+                                <label for="electricityBill">Montant (DH)</label>
+                                <input type="number" id="electricityBill" name="electricityBill" step="0.01" min="0" required>
+                            </div>
+                        </div>
+
+                        <div class="expense-category">
+                            <div class="expense-header">
+                                <i class="fas fa-wifi expense-icon"></i>
+                                <h4>Facture WiFi</h4>
+                            </div>
+                            <div class="form-group">
+                                <label for="wifiBill">Montant (DH)</label>
+                                <input type="number" id="wifiBill" name="wifiBill" step="0.01" min="0" required>
+                            </div>
+                        </div>
+
+                        <div class="expense-category full-width">
+                            <div class="expense-header">
+                                <i class="fas fa-shopping-cart expense-icon"></i>
+                                <h4>Autres Dépenses</h4>
+                            </div>
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label for="otherExpenses">Montant (DH)</label>
+                                    <input type="number" id="otherExpenses" name="otherExpenses" step="0.01" min="0">
+                                </div>
+                                <div class="form-group">
+                                    <label for="otherExpensesDescription">Description</label>
+                                    <textarea id="otherExpensesDescription" name="otherExpensesDescription" placeholder="Décrivez les autres dépenses..."></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Submit Button -->
+                <div class="form-submit">
+                    <button type="submit" class="btn-primary">
+                        <i class="fas fa-calculator"></i>
+                        Calculer les Bénéfices
+                    </button>
+                </div>
+            </form>
+
+            <!-- Results Section -->
+            <section id="results"></section>
+        </section>
+
+        <!-- History Section -->
+        <section id="history" class="main-section">
+            <div class="section-header">
+                <h1><i class="fas fa-history"></i> Historique des Calculs</h1>
+                <div class="history-controls">
+                    <button class="btn-secondary" onclick="clearHistory()">
+                        <i class="fas fa-trash"></i>
+                        Vider l'historique
+                    </button>
+                </div>
+            </div>
+            <div id="historyList" class="history-list">
+                <p class="no-data">Aucun historique disponible</p>
+            </div>
+        </section>
+
+        <!-- Partners Section -->
+        <section id="partners" class="main-section">
+            <div class="section-header">
+                <h1><i class="fas fa-handshake"></i> Gestion des Associés</h1>
+            </div>
+            
+            <div class="partners-management">
+                <div class="form-section">
+                    <h2><i class="fas fa-user-plus"></i> Ajouter un Associé</h2>
+                    <div class="partner-form">
+                        <div class="form-group">
+                            <label for="partnerName">Nom de l'associé</label>
+                            <input type="text" id="partnerName" placeholder="Nom complet">
+                        </div>
+                        <div class="form-group">
+                            <label for="partnerShare">Part (%) </label>
+                            <input type="number" id="partnerShare" step="0.01" min="0" max="100">
+                        </div>
+                        <div class="form-group">
+                            <label for="partnerPersonalExpenses">Dépenses personnelles (DH)</label>
+                            <input type="number" id="partnerPersonalExpenses" step="0.01" min="0">
+                        </div>
+                        <div class="form-group">
+    <label for="partnerPersonalGains">Gains personnels (DH)</label>
+    <input type="number" id="partnerPersonalGains" step="0.01" min="0">
+</div>
+
+                        <button type="button" id="addPartner" class="btn-add">
+                            <i class="fas fa-plus"></i>
+                            Ajouter
+                        </button>
+                    </div>
+                </div>
+                
+                <div id="partnersList" class="partners-list">
+                    <p class="no-partners">Aucun associé ajouté</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Employees Section -->
+        <section id="employees" class="main-section">
+            <div class="section-header">
+                <h1><i class="fas fa-users"></i> Gestion des Employés</h1>
+            </div>
+            
+            <div class="employees-management">
+                <div class="form-section">
+                    <h2><i class="fas fa-user-plus"></i> Ajouter un Employé</h2>
+                    <div class="employee-form-advanced">
+                        <div class="form-group">
+                            <label for="employeeName">Nom de l'employé</label>
+                            <input type="text" id="employeeName" placeholder="Nom complet">
+                        </div>
+                        <div class="form-group">
+                            <label for="employeePosition">Poste</label>
+                            <input type="text" id="employeePosition" placeholder="Titre du poste">
+                        </div>
+                        <div class="form-group">
+                            <label for="employeeSalary">Salaire (DH)</label>
+                            <input type="number" id="employeeSalary" step="0.01" min="0">
+                        </div>
+                        <div class="form-group">
+                            <label for="employeeStartDate">Date d'embauche</label>
+                            <input type="date" id="employeeStartDate">
+                        </div>
+                        <button type="button" id="addEmployee" class="btn-add">
+                            <i class="fas fa-plus"></i>
+                            Ajouter
+                        </button>
+                    </div>
+                </div>
+                
+                <div id="employeesList" class="employees-list-advanced">
+                    <p class="no-employees">Aucun employé ajouté</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Reports Section -->
+        <section id="reports" class="main-section">
+            <div class="section-header">
+                <h1><i class="fas fa-chart-bar"></i> Rapports et Analyses</h1>
+                <div class="report-controls">
+                    <select id="reportType" class="report-selector">
+                        <option value="monthly">Rapport Mensuel</option>
+                        <option value="yearly">Rapport Annuel</option>
+                        <option value="comparison">Comparaison</option>
+                    </select>
+                    <button class="btn-primary" onclick="generateReport()">
+                        <i class="fas fa-chart-line"></i>
+                        Générer
+                    </button>
+                </div>
+            </div>
+            <div id="reportContent" class="report-content">
+                <p class="no-data">Sélectionnez un type de rapport et cliquez sur "Générer"</p>
+            </div>
+        </section>
+    </div>
+
+    <!-- Modals -->
+    <div id="employeeModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Modifier l'Employé</h3>
+                <button class="modal-close" onclick="closeEmployeeModal()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="editEmployeeForm">
+                    <input type="hidden" id="editEmployeeIndex">
+                    <div class="form-group">
+                        <label for="editEmployeeName">Nom</label>
+                        <input type="text" id="editEmployeeName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="editEmployeePosition">Poste</label>
+                        <input type="text" id="editEmployeePosition" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="editEmployeeSalary">Nouveau Salaire (DH)</label>
+                        <input type="number" id="editEmployeeSalary" step="0.01" min="0" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="salaryChangeReason">Raison du changement</label>
+                        <textarea id="salaryChangeReason" placeholder="Promotion, augmentation annuelle, etc."></textarea>
+                    </div>
+                    <div class="modal-actions">
+                        <button type="button" class="btn-secondary" onclick="closeEmployeeModal()">Annuler</button>
+                        <button type="submit" class="btn-primary">Sauvegarder</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div id="partnerModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Modifier l'Associé</h3>
+                <button class="modal-close" onclick="closePartnerModal()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="editPartnerForm">
+                    <input type="hidden" id="editPartnerIndex">
+                    <div class="form-group">
+                        <label for="editPartnerName">Nom</label>
+                        <input type="text" id="editPartnerName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="editPartnerShare">Part (%)</label>
+                        <input type="number" id="editPartnerShare" step="0.01" min="0" max="100" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="editPartnerPersonalExpenses">Dépenses personnelles (DH)</label>
+                        <input type="number" id="editPartnerPersonalExpenses" step="0.01" min="0">
+                    </div>
+                    <div class="form-group">
+    <label for="editPartnerPersonalGains">Gains personnels (DH)</label>
+    <input type="number" id="editPartnerPersonalGains" step="0.01" min="0">
+</div>
+
+                    <div class="modal-actions">
+                        <button type="button" class="btn-secondary" onclick="closePartnerModal()">Annuler</button>
+                        <button type="submit" class="btn-primary">Sauvegarder</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Alert System -->
+    <div id="alertContainer" class="alert-container"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>
